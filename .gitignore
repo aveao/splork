@@ -3,4 +3,7 @@ drawing.h
 drawing_v.h
 drawing_h.h
 *.png
+*.jpg
 !imageconverter/sampleimages/*.png
+!diffgen/sampleimages/*.png
+!diffgen/sampleimages/*.jpg

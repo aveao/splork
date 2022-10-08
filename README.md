@@ -57,6 +57,20 @@ make
     - tip: draw sessions can take upwards of 40 minutes (converter will give you a better figure based on your image), which obviously has battery implications. to ensure your drawing session isn't cut short, you're strongly recommended to keep your switch docked.
 - shortly press the `BOOTSEL` button on the board to start drawing.
 
+if you have any drifted lines etc, or if you just want to add a small change, see the "doing drawing cleanups" section.
+
+## doing drawing cleanups
+
+you can use diffgen with `diffgen/diffgen.py`. you'll want to feed it the intended drawing image, and a screenshot of the switch. both 720p screenshots and 1080p frame-grabs from capture cards are accounted for, with 1080p frame-grab pngs recommended.
+
+example command: `python3 diffgen.py ../imageconverter/sampleimages/testcard.png switchscreenshot.jpg`
+
+this will output a `diffresult.png` image that you can then throw to `instructionconverter`, flash to pi and have another go with.
+
+do note:
+- 720p is not well tested.
+- right now cleanups involving B presses are a bit buggy.
+
 ## reasonable questions and hopefully reasonable answers
 
 ### what's up with the name
@@ -67,7 +81,7 @@ splatoon -> sploon -> spoon -> spork -> splork
 
 that happens, unfortunately, and I haven't found a good way to prevent that. overdraws and waiting after each line helps, but those work more for reducing the resulting damage to one line instead of two or more.
 
-my recommendation is use diffgen to do a second run to fix up those lines ("cleanup run").
+my recommendation is use diffgen to do a second run to fix up those lines ("cleanup run"), see "doing drawing cleanups" section for more info.
 
 ### why is the codebase designed like this
 
@@ -79,7 +93,7 @@ iter 3 offloads practically all the logic to external code, and while this makes
 
 ## todos
 
-- cleanup and publish of diffgen for easier cleanup images
+- improve B button reliability on cleanups
 - docker support
 - pi pico w support for uploading instructions directly to flash without need to re-compile or re-flash image
 - better drawing instructions for faster drawing, a la https://github.com/Victrid/splatplost

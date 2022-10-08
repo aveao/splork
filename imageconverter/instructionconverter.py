@@ -19,7 +19,7 @@ def get_color_button_press(r, g, b, intended_a, is_cleanup_round):
     instruction = 0
     # skip transparent pixels
     if not intended_a:
-        return
+        return instruction
 
     if (r, g, b) == (0, 0, 0):
         instruction = A
@@ -147,6 +147,11 @@ if __name__ == "__main__":
 
     # TODO: change this, argparse?
     is_cleanup_round = "diff" in intended_img_filename
+    if not is_cleanup_round:
+        print(
+            "Note: This run is not marked as cleanup round and "
+            "will clear the canvas."
+        )
 
     h_count, h_instructions = gen_instructions(
         intended_img_filename, is_cleanup_round, False
