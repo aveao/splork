@@ -45,24 +45,30 @@ make
 
 ## reasonable questions and hopefully reasonable answers
 
+### what's up with the name
+
+splatoon -> sploon -> spoon -> spork -> splork
+
+### my drawing wasn't perfect, some lines drifted!
+
+that happens, unfortunately, and I haven't found a good way to prevent that. overdraws and waiting after each line helps, but those work more for reducing the resulting damage to one line instead of two or more.
+
+my recommendation is use diffgen to do a second run to fix up those lines ("cleanup run").
+
 ### why is the codebase designed like this
 
 this is actually the third complete rewrite of this code.
 
 iter 1 and 2 included the image->button press logic directly in the C code, however this was ugly (as I ended up keeping it mostly in the shape of a state machine, it grew a ton and became hard to read and maintain) and came with limitations (most notably, I want to eventually support transfering instructions on its own without the need to reflash, and that'd limit the drawings to be possible to be drawn in one specific drawing algorithm only).
 
-iter 3 offloads practically all the logic to external code, and while this makes it less impressive on its own, in the end the UX is the same (previously you'd need to convert the image to a C array with a script anyways), but code is cleaner and easier to work with.
-
-### what's up with the name
-
-splatoon -> sploon -> spoon -> spork -> splork
+iter 3 offloads practically all the logic to external code, and while this makes it less impressive on its own, in the end the UX is the same (previously you'd need to convert the image to a C array with a script anyways), but code is cleaner and easier to work with. the resulting image is larger, but that's a compromise I'm willing to make.
 
 ## todos
 
-- pi pico w support for uploading instructions directly to flash without need to re-compile or re-flash image
 - cleanup and publish of diffgen for easier cleanup images
-- better drawing instructions for faster drawing, a la https://github.com/Victrid/splatplost
 - docker support
+- pi pico w support for uploading instructions directly to flash without need to re-compile or re-flash image
+- better drawing instructions for faster drawing, a la https://github.com/Victrid/splatplost
 
 ## licenses
 
