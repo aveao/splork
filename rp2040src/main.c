@@ -101,30 +101,25 @@ void drawing_task(void)
 
     uint8_t instruction = drawing_instructions[drawing_instructions_progress];
 
-    buttons |= (instruction & 1) ? SWITCH_MASK_A : 0;
-    buttons |= (instruction & 2) ? SWITCH_MASK_B : 0;
-    buttons |= (instruction & 64) ? (SWITCH_MASK_L | SWITCH_MASK_L3) : 0;
+    buttons |= ((instruction & 1) == 1) ? SWITCH_MASK_A : 0;
+    buttons |= ((instruction & 2) == 2) ? SWITCH_MASK_B : 0;
+    buttons |= ((instruction & 64) == 64) ? (SWITCH_MASK_L | SWITCH_MASK_L3) : 0;
 
-    // TODO: clean this up
-    if (instruction & 4) {
-        if (instruction & 16) {
-            hat = SWITCH_HAT_UPRIGHT;
-        } else if (instruction & 32) {
-            hat = SWITCH_HAT_DOWNRIGHT;
-        } else {
-            hat = SWITCH_HAT_RIGHT;
-        }
-    } else if (instruction & 8) {
-        if (instruction & 16) {
-            hat = SWITCH_HAT_UPLEFT;
-        } else if (instruction & 32) {
-            hat = SWITCH_HAT_DOWNLEFT;
-        } else {
-            hat = SWITCH_HAT_LEFT;
-        }
-    } else if (instruction & 16) {
+    if ((instruction & 20) == 20) {
+        hat = SWITCH_HAT_UPRIGHT;
+    } else if ((instruction & 36) == 36) {
+        hat = SWITCH_HAT_DOWNRIGHT;
+    } else if ((instruction & 4) == 4) {
+        hat = SWITCH_HAT_RIGHT;
+    } else if ((instruction & 24) == 24) {
+        hat = SWITCH_HAT_UPLEFT;
+    } else if ((instruction & 40) == 40) {
+        hat = SWITCH_HAT_DOWNLEFT;
+    } else if ((instruction & 8) == 8) {
+        hat = SWITCH_HAT_LEFT;
+    } else if ((instruction & 16) == 16) {
         hat = SWITCH_HAT_UP;
-    } else if (instruction & 32) {
+    } else if ((instruction & 32) == 32) {
         hat = SWITCH_HAT_DOWN;
     }
 
