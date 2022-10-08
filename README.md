@@ -6,7 +6,21 @@ splatoon 3 art drawer/printer for pi pico (or any other RP2040 board)
 
 ## generating instruction files
 
-TODO: imageconverter instructions
+### installing dependencies
+
+- you'll need python 3.6+
+- install `requirements.txt` with `pip3 install -Ur requirements.txt`
+
+### preparing your image
+
+you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `imageconverter`.
+
+### finally, generating the file
+
+- run `python3 instructionconverter.py filenamegoeshere.png`
+- this will generate both a vertical and horizontal drawing instruction, pick the one that has the shorter draw time, and save it as `drawing.h`. it will also print the draw time.
+- you're done. proceed to building the rp2040 image using your `drawing.h` file.
+    - if you specifically want to draw vertically or horizontally, you can rename `drawing_v.h`/`drawing_h.h` to `drawing.h` and use that instead.
 
 ## deploying to rp2040
 

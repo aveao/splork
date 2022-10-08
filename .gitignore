@@ -1,2 +1,6 @@
 rp2040src/build
 drawing.h
+drawing_v.h
+drawing_h.h
+*.png
+!imageconverter/sampleimages/*.png
