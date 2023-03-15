@@ -10,5 +10,9 @@ WORKDIR /app
 COPY imageconverter imageconverter
 RUN pip3 install -Ur imageconverter/requirements.txt
 
+COPY rp2040src rp2040src
+RUN mkdir -p rp2040src/build
+RUN cd rp2040src/build; cmake ..
+
 COPY .scripts .scripts
 ENTRYPOINT [".scripts/dockerbuild.sh"]

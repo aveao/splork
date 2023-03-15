@@ -11,4 +11,7 @@ cp imageconverter/drawing.h rp2040src/
 
 # build the image
 mkdir -p rp2040src/build
-cd rp2040src/build; cmake ..; make
+cd rp2040src/build; make; cd ../..
+
+# move resulting image
+cp rp2040src/build/splork.uf2 build/

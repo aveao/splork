@@ -7,7 +7,7 @@
 
 ### preparing your image
 
-you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `imageconverter`.
+you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `images`.
 
 ### finally, generating the file
 

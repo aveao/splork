@@ -8,7 +8,7 @@ splatoon 3 art drawer/printer for pi pico (or any other RP2040 board)
 
 ### preparing your image
 
-you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `imageconverter`.
+you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `images`.
 
 ### building splork
 
@@ -19,17 +19,17 @@ you're recommended to create a 320x120 PNG file using your favorite image editor
 docker build . --tag splork
 ```
 
-- put the image you prepared somewhere in the splork folder
-- build splork with your preferred image (replace `imageconverter/sampleimages/blank.png` with your image's path inside splork folder):
+- put the image you prepared in the `images` folder (in `splork` folder)
+- build splork with your preferred image (replace `images/sampleimages/blank.png` with your image's path inside splork folder):
 
 ```bash
-docker run -it -v .:/app splork imageconverter/sampleimages/blank.png
+docker run --rm -it -v ./images:/app/images -v ./build:/app/build splork images/sampleimages/blank.png
 ```
 
 ### flashing rp2040
 
 - while holding down `BOOTSEL` button on your board, plug it onto your computer.
-- copy `splork.uf2` from `rp2040src/build/` to the newly mounted `RPI-RP2` drive.
+- copy `splork.uf2` from `build/` to the newly mounted `RPI-RP2` drive.
 
 ### drawing
 
