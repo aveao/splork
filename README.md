@@ -4,45 +4,27 @@ splatoon 3 art drawer/printer for pi pico (or any other RP2040 board)
 
 [![video demo of splork](https://thumbs.gfycat.com/SlimyFoolhardyBernesemountaindog-size_restricted.gif)](https://gfycat.com/slimyfoolhardybernesemountaindog)
 
-## generating instruction files
-
-### installing dependencies
-
-- you'll need python 3.6+.
-- install `requirements.txt` with `pip3 install -Ur requirements.txt`.
+## easy setup: using docker
 
 ### preparing your image
 
 you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `imageconverter`.
 
-### finally, generating the file
+### building splork
 
-- run `python3 instructionconverter.py filenamegoeshere.png`.
-- this will generate both a vertical and horizontal drawing instruction, pick the one that has the shorter draw time, and save it as `drawing.h`. it will also print the draw time.
-- you're done. proceed to building the rp2040 image using your `drawing.h` file.
-    - if you specifically want to draw vertically or horizontally, you can rename `drawing_v.h`/`drawing_h.h` to `drawing.h` and use that instead.
+- install docker
+- build the splork docker image (only needed once, be warned, downloads and uses ~3GB of data due to Pi Pico C SDK):
 
-## deploying to rp2040
-
-### installing dependencies
-
-you're strongly recommended to use linux. support will not be provided for other operating systems.
-
-follow instructions on the official [getting started guide pdf, chapter 2](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) to install the sdk and the toolchain.
-
-### building image
-
-- copy your intended `drawing.h` file to the `rp2040src` folder (see "generating instruction files" section above for more info).
-    - tip: this is usually `cp imageconverter/drawing.h rp2040src/` from the project base.
-- enter the `rp2040src` folder and run the following commands:
 ```bash
-mkdir build
-cd build
-export PICO_SDK_PATH=/your/pico-sdk/path-goes-here
-cmake ..
-make
+docker build . --tag splork
 ```
-- on subsequent builds you only need to run `cd build`, the `export` command and `make`
+
+- put the image you prepared somewhere in the splork folder
+- build splork with your preferred image (replace `imageconverter/sampleimages/blank.png` with your image's path inside splork folder):
+
+```bash
+docker run -it -v .:/app splork imageconverter/sampleimages/blank.png
+```
 
 ### flashing rp2040
 
@@ -58,6 +40,10 @@ make
 - shortly press the `BOOTSEL` button on the board to start drawing.
 
 if you have any drifted lines etc, or if you just want to add a small change, see the "doing drawing cleanups" section.
+
+## advanced setup: not using docker
+
+see [MANUAL_SETUP.md](/MANUAL_SETUP.md) for more info on this.
 
 ## doing drawing cleanups
 
