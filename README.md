@@ -13,11 +13,14 @@ you're recommended to create a 320x120 PNG file using your favorite image editor
 ### building splork
 
 - install docker
+- open a terminal on the splork folder
 - build the splork docker image (only needed once, be warned, downloads and uses ~3GB of data due to Pi Pico C SDK):
 
 ```bash
 docker build . --tag splork
 ```
+
+(this command must be run on the splork folder)
 
 - put the image you prepared in the `images` folder (in `splork` folder)
 - build splork with your preferred image (replace `images/sampleimages/blank.png` with your image's path inside splork folder):
@@ -25,6 +28,8 @@ docker build . --tag splork
 ```bash
 docker run --rm -it -v ./images:/app/images -v ./build:/app/build splork images/sampleimages/blank.png
 ```
+
+(this command must be run on the splork folder)
 
 ### flashing rp2040
 
