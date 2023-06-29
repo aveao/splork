@@ -25,8 +25,26 @@ docker build . --tag splork
 - put the image you prepared in the `images` folder (in `splork` folder)
 - build splork with your preferred image (replace `images/sampleimages/blank.png` with your image's path inside splork folder):
 
+**Linux/MacOS:**
+
 ```bash
 docker run --rm -it -v ./images:/app/images -v ./build:/app/build splork images/sampleimages/blank.png
+```
+
+(this command must be run on the splork folder)
+
+**Windows Command Prompt:**
+
+```bash
+docker run --rm -it -v %cd%/images:/app/images -v %cd%/build:/app/build splork images/sampleimages/blank.png
+```
+
+(this command must be run on the splork folder)
+
+**Windows PowerShell:**
+
+```bash
+docker run --rm -it -v ${pwd}/images:/app/images -v ${pwd}/build:/app/build splork images/sampleimages/blank.png
 ```
 
 (this command must be run on the splork folder)
@@ -85,7 +103,6 @@ iter 3 offloads practically all the logic to external code, and while this makes
 ## todos
 
 - improve B button reliability on cleanups
-- docker support
 - pi pico w support for uploading instructions directly to flash without need to re-compile or re-flash image
 - better drawing instructions for faster drawing, a la https://github.com/Victrid/splatplost
 
