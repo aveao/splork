@@ -10,6 +10,8 @@ splatoon 3 art drawer/printer for pi pico (or any other RP2040 board)
 
 you're recommended to create a 320x120 PNG file using your favorite image editor, ideally with only black and white pixels. pixels that are neither will be ignored. transparent pixels will be ignored. for sample images, see `sampleimages` folder under `images`.
 
+you can use gimp to generate properly dithered images by selecting `Image->Mode->Indexed` and then picking `Use black and white (1-bit) palette`. you should also pick one of the Floyd-Steinberg color ditherings in the same menu.
+
 ### building splork
 
 - install docker
