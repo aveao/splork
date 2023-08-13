@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>splork web patcher</title>
+<style>
+html {
+    height: 100%;
+}
+body {
+    text-align: center;
+    font-family: sans-serif;
+    color: #ffffff;
+    background-color: #000000;
+    position: absolute;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.topdiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 30px;
+}
+.imgdiv {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+#imgcanvas {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 320px;
+    height: 120px;
+    border: 1px solid green;
+}
+
+.halfbigbutton {
+    height: 50px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#imgpicker {
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+<!-- God I hate HTML+CSS -->
+    <div class="topdiv">
+        <input type="file" id="imgpicker" accept="image/jpg,image/jpeg,image/png">
+        <button class="halfbigbutton" onclick="handler_image_picker();" id="image_picker" disabled>patch splork with image</button>
+        <div id="resultdisplay">pick image, please.</div>
+    </div>
+    <div class="imgdiv">
+        <canvas id="imgcanvas"></canvas>
+    </div>
+    <script src="splorkwebpatcher.js"></script> 
+</body>
+</html>
