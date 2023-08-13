@@ -10,5 +10,6 @@ cp imageconverter/placeholder_drawing.h rp2040src/drawing.h
 mkdir -p rp2040src/build
 cd rp2040src/build; make; cd ../..
 
-# move resulting image
+# move resulting images
 cp rp2040src/build/splork.uf2 build/
+cp rp2040src/build/splork.bin build/
