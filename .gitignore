@@ -8,3 +8,4 @@ drawing_h.h
 !diffgen/sampleimages/*.png
 !diffgen/sampleimages/*.jpg
 build/
+__pycache__/

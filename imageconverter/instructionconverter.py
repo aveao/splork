@@ -128,6 +128,10 @@ def gen_instructions(
         instructions += [get_moving_direction_key(vertical_mode), NOOP]
         reversed_line = not reversed_line
 
+    return instructions
+
+
+def instructions_to_c(instructions):
     instructions_str = [str(instruction) for instruction in instructions]
 
     # TODO: this is ugly, can we clean it up?
@@ -139,7 +143,44 @@ def gen_instructions(
         + "\n};"
     )
 
-    return len(instructions), file_text
+    return file_text
+
+
+def get_smaller_instructions(
+    intended_img_filename,
+    is_cleanup_round,
+    overdraw_amount=10,
+    print_direction=True,
+    save_directions=True,
+):
+    h_instructions = gen_instructions(intended_img_filename, is_cleanup_round, False)
+    if save_directions:
+        with open("drawing_h.h", "w") as f:
+            f.write(instructions_to_c(h_instructions))
+
+    v_instructions = gen_instructions(intended_img_filename, is_cleanup_round, True)
+    if save_directions:
+        with open("drawing_v.h", "w") as f:
+            f.write(instructions_to_c(v_instructions))
+
+    if len(h_instructions) < len(v_instructions):
+        instructions = h_instructions
+        if print_direction:
+            print("Doing horizontal drawing.")
+    else:
+        instructions = v_instructions
+        if print_direction:
+            print("Doing vertical drawing.")
+
+    # assumes 25ms per cycle + 1.5 seconds for initial wait commands
+    exec_mins = int((1500 + (len(instructions) * 25)) / 1000 / 60)
+
+    if print_direction:
+        print(
+            f"Expected drawing time is ~{exec_mins} minutes (instruction count: {len(instructions)})."
+        )
+
+    return instructions
 
 
 if __name__ == "__main__":
@@ -153,31 +194,12 @@ if __name__ == "__main__":
             "will clear the canvas."
         )
 
-    h_count, h_instructions = gen_instructions(
-        intended_img_filename, is_cleanup_round, False
+    instructions = get_smaller_instructions(
+        intended_img_filename,
+        is_cleanup_round,
+        print_direction=True,
+        save_directions=True,
     )
-    with open("drawing_h.h", "w") as f:
-        f.write(h_instructions)
-
-    v_count, v_instructions = gen_instructions(
-        intended_img_filename, is_cleanup_round, True
-    )
-    with open("drawing_v.h", "w") as f:
-        f.write(v_instructions)
-
-    if h_count < v_count:
-        instructions_str = h_instructions
-        count = h_count
-        print("Doing horizontal drawing.")
-    else:
-        instructions_str = v_instructions
-        count = v_count
-        print("Doing vertical drawing.")
-
-    # assumes 25ms per cycle + 1.5 seconds for initial wait commands
-    exec_mins = int((1500 + (count * 25)) / 1000 / 60)
-
-    print(f"Expected drawing time is ~{exec_mins} minutes.")
 
     with open("drawing.h", "w") as f:
-        f.write(instructions_str)
+        f.write(instructions_to_c(instructions))
