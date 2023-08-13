@@ -3,7 +3,7 @@ name: Build base splork image
 on: push
 
 jobs:
-  test-code:
+  build:
     runs-on: "ubuntu-22.04"
     steps:
       - name: Checkout
