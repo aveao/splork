@@ -1,0 +1,36 @@
+name: Publish base splork image
+
+on:
+  push:
+    tags:        
+      - '*'
+
+jobs:
+  test-code:
+    runs-on: "ubuntu-22.04"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build docker image
+        run: docker build . --tag splorkci -f Dockerfile.ci
+
+      - name: Build base splork image
+        run: docker run --rm -it -v ./build:/app/build splorkci
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: splork.bin
+          path: build/splork.bin
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: splork.uf2
+          path: build/splork.uf2
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files:
+            - build/splork.uf2
+            - build/splork.bin
