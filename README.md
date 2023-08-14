@@ -4,7 +4,7 @@ splatoon 3 art drawer/printer for pi pico (or any other RP2040 board)
 
 [![video demo of splork](https://thumbs.gfycat.com/SlimyFoolhardyBernesemountaindog-size_restricted.gif)](https://gfycat.com/slimyfoolhardybernesemountaindog)
 
-## easy setup: using docker
+## easy setup: patching the image online
 
 ### preparing your image
 
