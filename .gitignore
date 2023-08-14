@@ -8,3 +8,6 @@ drawing_h.h
 !diffgen/sampleimages/*.png
 !diffgen/sampleimages/*.jpg
 build/
+__pycache__/
+webpatcher/splork.bin
+webpatcher/splork_offset.json

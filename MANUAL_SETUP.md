@@ -1,3 +1,44 @@
+# building with docker
+
+- install docker
+- open a terminal on the splork folder
+- build the splork docker image (only needed once, be warned, downloads and uses ~3GB of data due to Pi Pico C SDK):
+
+```bash
+docker build . --tag splork
+```
+
+(this command must be run on the splork folder)
+
+- put the image you prepared in the `images` folder (in `splork` folder)
+- build splork with your preferred image (replace `images/sampleimages/blank.png` with your image's path inside splork folder):
+
+**Linux/MacOS:**
+
+```bash
+docker run --rm -it -v ./images:/app/images -v ./build:/app/build splork images/sampleimages/blank.png
+```
+
+(this command must be run on the splork folder)
+
+**Windows Command Prompt:**
+
+```bash
+docker run --rm -it -v %cd%/images:/app/images -v %cd%/build:/app/build splork images/sampleimages/blank.png
+```
+
+(this command must be run on the splork folder)
+
+**Windows PowerShell:**
+
+```bash
+docker run --rm -it -v ${pwd}/images:/app/images -v ${pwd}/build:/app/build splork images/sampleimages/blank.png
+```
+
+(this command must be run on the splork folder)
+
+# building without docker
+
 ## generating instruction files
 
 ### installing dependencies

@@ -12,49 +12,14 @@ you're recommended to create a 320x120 PNG file using your favorite image editor
 
 you can use gimp to generate properly dithered images by selecting `Image->Mode->Indexed` and then picking `Use black and white (1-bit) palette`. you should also pick one of the Floyd-Steinberg color ditherings in the same menu.
 
-### building splork
+### patching splork with your image
 
-- install docker
-- open a terminal on the splork folder
-- build the splork docker image (only needed once, be warned, downloads and uses ~3GB of data due to Pi Pico C SDK):
-
-```bash
-docker build . --tag splork
-```
-
-(this command must be run on the splork folder)
-
-- put the image you prepared in the `images` folder (in `splork` folder)
-- build splork with your preferred image (replace `images/sampleimages/blank.png` with your image's path inside splork folder):
-
-**Linux/MacOS:**
-
-```bash
-docker run --rm -it -v ./images:/app/images -v ./build:/app/build splork images/sampleimages/blank.png
-```
-
-(this command must be run on the splork folder)
-
-**Windows Command Prompt:**
-
-```bash
-docker run --rm -it -v %cd%/images:/app/images -v %cd%/build:/app/build splork images/sampleimages/blank.png
-```
-
-(this command must be run on the splork folder)
-
-**Windows PowerShell:**
-
-```bash
-docker run --rm -it -v ${pwd}/images:/app/images -v ${pwd}/build:/app/build splork images/sampleimages/blank.png
-```
-
-(this command must be run on the splork folder)
+Open https://splork.ave.zone, and upload your image, patch it then download the uf2 file.
 
 ### flashing rp2040
 
 - while holding down `BOOTSEL` button on your board, plug it onto your computer.
-- copy `splork.uf2` from `build/` to the newly mounted `RPI-RP2` drive.
+- copy the splork uf2 file to the newly mounted `RPI-RP2` drive.
 
 ### drawing
 
@@ -66,7 +31,7 @@ docker run --rm -it -v ${pwd}/images:/app/images -v ${pwd}/build:/app/build splo
 
 if you have any drifted lines etc, or if you just want to add a small change, see the "doing drawing cleanups" section.
 
-## advanced setup: not using docker
+## optional advanced setup: building splork manually or with docker
 
 see [MANUAL_SETUP.md](/MANUAL_SETUP.md) for more info on this.
 
@@ -105,7 +70,7 @@ iter 3 offloads practically all the logic to external code, and while this makes
 ## todos
 
 - improve B button reliability on cleanups
-- pi pico w support for uploading instructions directly to flash without need to re-compile or re-flash image
+- pi pico w support for uploading instructions directly through web
 - better drawing instructions for faster drawing, a la https://github.com/Victrid/splatplost
 
 ## licenses
