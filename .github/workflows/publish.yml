@@ -36,7 +36,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files:
-            - build/splork.uf2
-            - build/splork.bin
-            - build/splork_offset.json
+          files: |
+            build/splork.uf2
+            build/splork.bin
+            build/splork_offset.json
