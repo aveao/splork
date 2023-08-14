@@ -24,3 +24,8 @@ jobs:
         with:
           name: splork.uf2
           path: build/splork.uf2
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: splork_offset.json
+          path: build/splork_offset.json

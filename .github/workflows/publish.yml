@@ -28,9 +28,15 @@ jobs:
           name: splork.uf2
           path: build/splork.uf2
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: splork_offset.json
+          path: build/splork_offset.json
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files:
             - build/splork.uf2
             - build/splork.bin
+            - build/splork_offset.json
